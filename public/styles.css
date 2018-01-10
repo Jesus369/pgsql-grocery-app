@@ -1,3 +1,7 @@
+body {
+	width: 100%;
+}
+
 .navbar {
 	display: flex;
 	flex-direction: row;
@@ -20,6 +24,47 @@
 	outline: none;
 	padding: .8em;
 	text-decoration: none;
+}
+
+/* WITHIN STORES.MUSTACHE */
+.contain_all{
+	border: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	margin: 3em 0 1em 2em;
+	padding: .5em;
+	width: 20%;
+}
+
+.add_store {
+	font-size: .8em;
+	margin-bottom: .5em;
+	text-align: right;
+}
+
+.outerlayer_store_info_div {
+	border: 1px solid red;
+}
+
+.innerlayer_store_info_div {
+}
+
+.store_name_div {
+	list-style-type: none;
+	margin: .3em 0 .3em .5em;
+}
+
+#show_desc_button {
+	font-size: 8px;
+	margin-left: 10px;
+}
+
+.store_description_div {
+	display: none;
+	border: 1px solid black;
+	margin: 0 0 .8em 1.5em;
+	list-style-type: none;
+	width: 80%;
 }
 
 /* WITHIN NEWSTORE.MUSTACHE */
