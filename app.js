@@ -23,21 +23,24 @@ const pgp = require('pg-promise')(options)
 var db = pgp(connectionString)
 
 
-// RESTful ROUTING
+// RESTfull ROUTING
 app.get('/', (req,res) => {
 	res.redirect('stores')
 })
 
+// STORES PAGE, DISPLAY ALL STORES
 app.get('/stores', (req,res) => {
 	db.any('SELECT * FROM stores').then( (storesdata) => {
 		res.render('stores', {stores : storesdata})
 	})
 })
 
+// NAVIGATING TO CREATE A STORE PAGE
 app.get('/stores/newstore', (req,res) => {
 		res.render('newstore')
 })
 
+// CREATE A NEW STORE
 app.post('/stores', (req,res) => {
 	let storename = req.body.storename
 	let addressone = req.body.addressone
@@ -50,7 +53,15 @@ app.post('/stores', (req,res) => {
 	'values(${storename},${addressone},${addresstwo},${city},${state},${zip})',req.body)
 
 	db.any('SELECT * from stores').then( (storesdata) => {
-		res.render('stores', {stores : storesdata})
+		res.redirect('/stores')
+	})
+})
+
+// GET STORES ID
+app.get('/stores/:id', (req,res) => {
+	db.any("SELECT * FROM stores WHERE storeid = " + "'" + req.params.id +"'")
+	.then( (data) => {
+		res.send(data)
 	})
 })
 
