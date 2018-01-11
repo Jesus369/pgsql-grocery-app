@@ -22,7 +22,14 @@
 	<div class="outerlayer_store_info_div">
 	{{#stores}}
 		<div class="innerlayer_store_info_div">
-			<div class="store_name_div"><li>{{name}}<button id="show_desc_button">SHOW</button></li></div>
+			<div class="store_name_div">
+				<li>
+					<a href="/stores/{{storeid}}">{{name}}</a><button id="show_desc_button">SHOW</button>
+					<form action="/stores/{{storeid}}?_method=DELETE" method="POST" class="delete_form">
+						<button id="show_desc_button">DELETE</button>
+					</form>
+				</li>
+			</div>
 			<div class="store_description_div">
 				<li>Address 1: {{addressone}}</li>
 				<li>Address 2: {{addresstwo}}</li>
