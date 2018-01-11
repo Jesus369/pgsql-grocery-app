@@ -39,10 +39,16 @@ function saveStore(req,res,next) {
 
 // SHOW THE STORE IN IT'S OWN PAGE
 function showStore (req,res,next) {
-	db.any("SELECT * FROM stores WHERE storeid = " + "'" + req.params.id +"'")
+	db.any("SELECT * FROM stores WHERE storeid = " + "'" + req.params.id +"'", req.body)
 	.then( (data) => {
 		res.render('showstore', {data : data})
 	})
+}
+
+function deleteStore (req,res,next) {
+	var storeid = parseInt(req.params.id)
+	db.result('DELETE FROM stores WHERE storeid = '+ "'" + storeid + "'")
+	res.redirect('/stores')
 }
 
 // EXPORT IT!
@@ -50,5 +56,6 @@ module.exports = {
 	redirectToStores,
 	newStore,
 	saveStore,
-	showStore
+	showStore,
+	deleteStore
 	}
