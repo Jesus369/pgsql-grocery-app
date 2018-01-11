@@ -31,10 +31,7 @@ app.post('/stores', db.saveStore)
 app.get('/stores/:id', db.showStore)
 
 // DELETE ROUTE
-app.delete('/stores/:id', (req,res) => {
-	var storeid = parseInt(req.params.id)
-	db.result('DELETE FROM stores WHERE storeid = $1', storeid)
-})
+app.delete('/stores/:id', db.deleteStore)
 
 
 app.listen(3000, () => {
