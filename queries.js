@@ -1,25 +1,26 @@
+// CONFIGURING POSTGRESQL
+var connectionString = 'postgres://localhost:5432/jayzuss'
+const pgp = require('pg-promise')(options)
 const promise = require('bluebird')
+var db = pgp(connectionString)
 
 var options = {
 	promiseLib : promise
 }
 
-// CONFIGURING POSTGRESQL
-var connectionString = 'postgres://localhost:5432/jayzuss'
-const pgp = require('pg-promise')(options)
-var db = pgp(connectionString)
-
-
+// TAKE ME TO STORE'S PAGE
 function redirectToStores(req, res, next) {
 		db.any('SELECT * FROM stores').then( (storesdata) => {
 		res.render('stores', {stores : storesdata})
 	})
 }
 
+// TAKE ME TO NEWSTORE'S PAGE
 function newStore(req,res,next) {
 	res.render('newstore')
 }
 
+// SAVE THE STORE
 function saveStore(req,res,next) {
 	let storename = req.body.storename
 	let addressone = req.body.addressone
@@ -36,6 +37,7 @@ function saveStore(req,res,next) {
 	})
 }
 
+// SHOW THE STORE IN IT'S OWN PAGE
 function showStore (req,res,next) {
 	db.any("SELECT * FROM stores WHERE storeid = " + "'" + req.params.id +"'")
 	.then( (data) => {
@@ -43,8 +45,10 @@ function showStore (req,res,next) {
 	})
 }
 
+// EXPORT IT!
 module.exports = {
 	redirectToStores,
 	newStore,
 	saveStore,
-	showStore}
+	showStore
+	}
